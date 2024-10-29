@@ -14,10 +14,10 @@ class Senha:
 
     @staticmethod
     def create(texto: str) -> Senha | None:
-        TAMANHO_SENHA_MINIMO = 4
-        TAMANHO_SENHA_MAXIMA = 16
+        tamanho_senha_minimo = 4
+        tamanho_senha_maxima = 16
 
-        if TAMANHO_SENHA_MINIMO <= len(texto) <= TAMANHO_SENHA_MAXIMA:
+        if tamanho_senha_minimo <= len(texto) <= tamanho_senha_maxima:
             return Senha(texto)
 
     @staticmethod
@@ -104,50 +104,22 @@ class Sala:
         return self.__descricao
 
 
+class Departamento:
+    def __init__(self, nome, descricao, horario_inicial, horario_final, responsaveis, sala):
+        self.__nome = nome
+        self.__horario_inicial = horario_inicial
+        self.__horario_final = horario_final
+        self.__responsaveis = responsaveis
+        self.__descricao = descricao
+        self.__sala = sala
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class GrupoDePesquisa:
+    def __init__(self, nome: str, descricao: str, projetos, professores):
+        self.__nome = nome
+        self.__projetos = projetos
+        self.__descricao = descricao
+        self.__professores_responsaveis = professores
 
 
 
