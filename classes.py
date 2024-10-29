@@ -25,6 +25,7 @@ class Senha:
         return Senha(texto)
 
 
+# Esta classe representa o usuário, é uma classe abstrata e tem as características gerais de um usuário.
 class Usuario(ABC):
     def __init__(self, nome: str, senha: Senha, id_suap: str):
         self.__nome = nome
@@ -70,3 +71,89 @@ class Administrador(Usuario):
 
     def modificar_usuario(self, user: Usuario) -> ModificadorUsuario:
         return ModificadorUsuario(user)
+
+
+# MAPA
+class Bloco:
+    def __init__(self, identificador, salas):
+        self.__identificador = identificador
+        self.__salas = salas
+
+    def get_salas(self):
+        return self.__salas
+
+
+class Andar:
+    def __init__(self, numero, salas):
+        self.__numero = numero
+        self.__salas = salas
+
+    def get_salas(self):
+        return self.__salas
+
+
+class Sala:
+    def __init__(self, numero, nome, descricao, andar, bloco):
+        self.__numero = numero
+        self.__nome = nome
+        self.__descricao = descricao
+        self.__andar = andar
+        self.__bloco = bloco
+
+    def get_info(self):
+        return self.__descricao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
