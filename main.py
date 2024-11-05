@@ -49,7 +49,7 @@ departamentoF = Departamento("NAPNE", "Atendimento às Pessoas com Necessidades 
 departamentoG = Departamento("CRA", "Coordenação de Registros Acadêmicos", None, None, None, None)
 
 grupo_de_pesquisaA = GrupoDePesquisa("GPMECATRONICA", "Projeto", ["Estrogênias"], ["Camila, Fernando"])
-grupo_de_pesquisaB = GrupoDePesquisa("GOTEC", "Projeto", None, ["Caio"]
+grupo_de_pesquisaB = GrupoDePesquisa("GOTEC", "Projeto", None, ["Caio"])
 
 
 
