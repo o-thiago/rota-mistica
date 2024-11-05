@@ -41,7 +41,7 @@ class Usuario(ABC):
     def get_id_suap(self):
         return self.__id_suap
 
- #Aqui esta ocorrendo Herança onde Aluno, servidor e Administrador estão herdando de usuário
+
 class Aluno(Usuario):
     def __init__(self, nome: str, senha: Senha, id_suap: str):
         super().__init__(nome, senha, id_suap)
@@ -71,6 +71,12 @@ class Administrador(Usuario):
 
     def modificar_usuario(self, user: Usuario) -> ModificadorUsuario:
         return ModificadorUsuario(user)
+
+    def criar_sala(self, numero, nome, descricao, andar, bloco) -> Sala:
+        return Sala(numero, nome, descricao, andar, bloco)
+
+    def criar_projeto(self, nome, descricao, professores):
+        return Projeto(nome, descricao, professores)
 
 
 # MAPA
@@ -114,6 +120,19 @@ class Departamento:
         self.__sala = sala
 
 
+class Projeto:
+    def __init__(self, nome: str, descricao: str, professores):
+        self.__nome = nome
+        self.__descricao = descricao
+        self.__professores_responsaveis = professores
+
+    def set_nome(self, nome: str):
+        self.__nome = nome
+
+    def set_descricao(self, descricao: str):
+        self.__descricao = descricao
+
+
 class GrupoDePesquisa:
     def __init__(self, nome: str, descricao: str, projetos, professores):
         self.__nome = nome
@@ -121,11 +140,14 @@ class GrupoDePesquisa:
         self.__descricao = descricao
         self.__professores_responsaveis = professores
 
+    def add_projeto(self, projeto):
+        self.__projetos.append(projeto)
 
+    def remove_projeto(self, projeto):
+        self.__projetos.remove(projeto)
 
+    def add_professores_responsaveis(self, professores):
+        self.__professores_responsaveis.extend(professores)
 
-
-
-
-
-
+    def get_projetos(self):
+        return self.__projetos
