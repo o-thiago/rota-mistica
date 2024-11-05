@@ -41,7 +41,7 @@ class Usuario(ABC):
     def get_id_suap(self):
         return self.__id_suap
 
-
+ #Aqui esta ocorrendo Herança onde Aluno, servidor e Administrador estão herdando de usuário
 class Aluno(Usuario):
     def __init__(self, nome: str, senha: Senha, id_suap: str):
         super().__init__(nome, senha, id_suap)
