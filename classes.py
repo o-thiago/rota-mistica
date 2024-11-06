@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 
 class Senha:
     __texto: str
@@ -73,84 +75,61 @@ class Administrador(Usuario):
     def modificar_usuario(self, user: Usuario) -> ModificadorUsuario:
         return ModificadorUsuario(user)
 
-    def criar_sala(self, numero, nome, descricao, andar, bloco) -> Sala:
-        return Sala(numero, nome, descricao, andar, bloco)
+    def criar_sala(self, numero, andar, bloco) -> Sala:
+        return Sala(numero, andar, bloco)
 
     def criar_projeto(self, nome, descricao, professores):
         return Projeto(nome, descricao, professores)
 
 
-# MAPA
+@dataclass
 class Bloco:
-    def __init__(self, identificador, salas):
-        self.__identificador = identificador
-        self.__salas = salas
-
-    def get_salas(self):
-        return self.__salas
+    # O identificador do bloco no IFRO (A, B, C...)
+    id: str
 
 
+@dataclass
 class Andar:
-    def __init__(self, numero, salas):
-        self.__numero = numero
-        self.__salas = salas
-
-    def get_salas(self):
-        return self.__salas
+    numero: int
 
 
+@dataclass
 class Sala:
-    def __init__(self, numero, nome, descricao, andar, bloco):
-        self.__numero = numero
-        self.__nome = nome
-        self.__descricao = descricao
-        self.__andar = andar
-        self.__bloco = bloco
-
-    def get_info(self):
-        return self.__descricao
+    numero: int | None
+    andar: int
+    bloco: int
 
 
+# Representa o horário de funcionamento de alguma entidade.
+# Por exemplo, o DEPAE pode funcionar das 8 as 12, GOTEC das 8 as 18 e assim vai.
+@dataclass
+class IntervaloFuncionamento:
+    inicial: int
+    final: int
+
+
+@dataclass
 class Departamento:
-    def __init__(
-        self, nome, descricao, horario_inicial, horario_final, responsaveis, sala
-    ):
-        self.__nome = nome
-        self.__horario_inicial = horario_inicial
-        self.__horario_final = horario_final
-        self.__responsaveis = responsaveis
-        self.__descricao = descricao
-        self.__sala = sala
+    nome: str
+    descricao: str
+    horarios: list[IntervaloFuncionamento]
+    # A tipagem disso aqui deve ser mudada futuramente. Mas vai depender da estrutura
+    # que o projeto vai tomar...
+    responsaveis: list[str]
+    sala: int | None
 
 
+@dataclass
 class Projeto:
-    def __init__(self, nome: str, descricao: str, professores):
-        self.__nome = nome
-        self.__descricao = descricao
-        self.__professores_responsaveis = professores
-
-    def set_nome(self, nome: str):
-        self.__nome = nome
-
-    def set_descricao(self, descricao: str):
-        self.__descricao = descricao
+    nome: str
+    descricao: str
+    professores: list[str]
 
 
+@dataclass
 class GrupoDePesquisa:
-    def __init__(self, nome: str, descricao: str, projetos, professores):
-        self.__nome = nome
-        self.__projetos = projetos
-        self.__descricao = descricao
-        self.__professores_responsaveis = professores
-
-    def add_projeto(self, projeto):
-        self.__projetos.append(projeto)
-
-    def remove_projeto(self, projeto):
-        self.__projetos.remove(projeto)
-
-    def add_professores_responsaveis(self, professores):
-        self.__professores_responsaveis.extend(professores)
-
-    def get_projetos(self):
-        return self.__projetos
+    nome: str
+    descricao: str
+    horarios: list[IntervaloFuncionamento]
+    projetos: list[Projeto]
+    professores: list[str]

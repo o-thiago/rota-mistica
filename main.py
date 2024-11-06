@@ -15,6 +15,7 @@ from classes import (
     Bloco,
     Departamento,
     GrupoDePesquisa,
+    Projeto,
     Senha,
     Servidor,
     Usuario,
@@ -45,36 +46,40 @@ for usuario_predefinido in [
     cadastrar_usuario(usuario_predefinido)
 
 # Definindo os blocos
-blocos = [Bloco("A", []), Bloco("B", []), Bloco("C", [])]
+blocos = [Bloco("A"), Bloco("B"), Bloco("C")]
 
 # Definindo os departamentos
 depertamentos = [
-    Departamento("depex", "estágios", None, None, ["Monnike"], None),
-    Departamento("depesp", "pesquisas", None, None, None, None),
-    Departamento("CPALM" "Patrimônio e Almoxarifado", None, None, None, None, None),
-    Departamento("DPLAD", "Planejamento e Administração", None, None, None, None),
-    Departamento("CGTI", "Gestão de Tecnologia da Informação", None, None, None, None),
+    Departamento("depex", "estágios", [], [], None),
+    Departamento("depesp", "pesquisas", [], [], None),
+    Departamento("CPALM", "Patrimônio e Almoxarifado", [], [], None),
+    Departamento("DPLAD", "Planejamento e Administração", [], [], None),
+    Departamento("CGTI", "Gestão de Tecnologia da Informação", [], [], None),
     Departamento(
         "NAPNE",
         "Atendimento às Pessoas com Necessidades Educacionais Específicas",
-        None,
-        None,
-        None,
+        [],
+        [],
         None,
     ),
-    Departamento("CRA", "Coordenação de Registros Acadêmicos", None, None, None, None),
+    Departamento("CRA", "Coordenação de Registros Acadêmicos", [], [], None),
 ]
 
 # Definindo grupos de pesquisa
 grupos_de_pesquisa = [
-    GrupoDePesquisa("GPMECATRONICA", "Projeto", ["Estrogênias"], ["Camila, Fernando"]),
-    GrupoDePesquisa("GOTEC", "Projeto", None, ["Caio"]),
+    GrupoDePesquisa(
+        "GPMECATRONICA",
+        "Projeto",
+        [],
+        [Projeto("Estrogênias", "Projeto de pesquisa", ["Camila"])],
+        ["Camila, Fernando"],
+    ),
+    GrupoDePesquisa("GOTEC", "Projeto", [], [], ["Caio"]),
 ]
 
 
 # Definindo andares
-primeiro_andar = Andar(0, [])
-segundo_andar = Andar(1, [])
+andares = [Andar(0), Andar(1)]
 
 
 def colorir_texto(cor: str, texto: str) -> str:
