@@ -9,7 +9,16 @@
 import colorama
 from colorama import Fore
 
-from classes import Aluno, Senha, Servidor, Usuario, Bloco, Andar, Departamento, GrupoDePesquisa, Admnistrador
+from classes import (
+    Aluno,
+    Andar,
+    Bloco,
+    Departamento,
+    GrupoDePesquisa,
+    Senha,
+    Servidor,
+    Usuario,
+)
 
 colorama.init()
 
@@ -17,7 +26,9 @@ usuarios_cadastrados: dict[str, Usuario] = {}
 
 
 def cadastrar_usuario(usuario: Usuario):
-    usuarios_cadastrados[usuario.get_id_suap() + usuario.get_senha().get_texto_simples()] = usuario
+    usuarios_cadastrados[
+        usuario.get_id_suap() + usuario.get_senha().get_texto_simples()
+    ] = usuario
 
 
 for usuario_predefinido in [
@@ -34,26 +45,42 @@ for usuario_predefinido in [
     cadastrar_usuario(usuario_predefinido)
 
 
-#Definindo os blocos 
+# Definindo os blocos
 blocoA = Bloco("A", [])
 blocoB = Bloco("B", [])
 blocoC = Bloco("C", [])
 
-#Definindo os departamentos 
-departamentoA = Departamento("depex", "estágios", None, None, ['Monnike'], None)
+# Definindo os departamentos
+departamentoA = Departamento("depex", "estágios", None, None, ["Monnike"], None)
 departamentoB = Departamento("depesp", "pesquisas", None, None, None, None)
-departamentoC = Departamento("CPALM" "Patrimônio e Almoxarifado", None, None, None, None)
-departamentoD = Departamento("DPLAD", "Planejamento e Administração", None, None, None, None)
-departamentoE = Departamento("CGTI", "Gestão de Tecnologia da Informação", None, None, None, None)
-departamentoF = Departamento("NAPNE", "Atendimento às Pessoas com Necessidades Educacionais Específicas", None, None, None, None)
-departamentoG = Departamento("CRA", "Coordenação de Registros Acadêmicos", None, None, None, None)
+departamentoC = Departamento(
+    "CPALM" "Patrimônio e Almoxarifado", None, None, None, None, None
+)
+departamentoD = Departamento(
+    "DPLAD", "Planejamento e Administração", None, None, None, None
+)
+departamentoE = Departamento(
+    "CGTI", "Gestão de Tecnologia da Informação", None, None, None, None
+)
+departamentoF = Departamento(
+    "NAPNE",
+    "Atendimento às Pessoas com Necessidades Educacionais Específicas",
+    None,
+    None,
+    None,
+    None,
+)
+departamentoG = Departamento(
+    "CRA", "Coordenação de Registros Acadêmicos", None, None, None, None
+)
 
-grupo_de_pesquisaA = GrupoDePesquisa("GPMECATRONICA", "Projeto", ["Estrogênias"], ["Camila, Fernando"])
+grupo_de_pesquisaA = GrupoDePesquisa(
+    "GPMECATRONICA", "Projeto", ["Estrogênias"], ["Camila, Fernando"]
+)
 grupo_de_pesquisaB = GrupoDePesquisa("GOTEC", "Projeto", None, ["Caio"])
 
 
-
-#Definindo andares 
+# Definindo andares
 primeiro_andar = Andar(0, [])
 segundo_andar = Andar(1, [])
 
