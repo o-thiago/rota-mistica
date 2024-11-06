@@ -133,3 +133,9 @@ class GrupoDePesquisa:
     horarios: list[IntervaloFuncionamento]
     projetos: list[Projeto]
     professores: list[str]
+
+    def adicionar_projeto(self, projeto: Projeto):
+        self.projetos.append(projeto)
+
+    def remover_projeto(self, projeto: Projeto):
+        self.projetos.remove(projeto)
