@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from abc import ABC
-
 
 class Senha:
     __texto: str
@@ -25,13 +23,16 @@ class Senha:
         return Senha(texto)
 
 
-# Esta classe representa o usuário, é uma classe abstrata e tem as características gerais de um usuário.
-class Usuario(ABC):
+# Esta classe representa o usuário, contem as características gerais de um usuário.
+# Não se trata de uma classe abstrata pois no momento ela não possui características
+# que necessitam ser modificadas por uma classe filha.
+class Usuario:
     def __init__(self, nome: str, senha: Senha, id_suap: str):
         self.__nome = nome
         self.__senha = senha
         self.__id_suap = id_suap
 
+    # À ser refatorado para getters e setters nativos do python.
     def get_nome(self):
         return self.__nome
 
@@ -111,7 +112,9 @@ class Sala:
 
 
 class Departamento:
-    def __init__(self, nome, descricao, horario_inicial, horario_final, responsaveis, sala):
+    def __init__(
+        self, nome, descricao, horario_inicial, horario_final, responsaveis, sala
+    ):
         self.__nome = nome
         self.__horario_inicial = horario_inicial
         self.__horario_final = horario_final
