@@ -26,12 +26,7 @@ colorama.init()
 
 usuarios_cadastrados: dict[str, Usuario] = {}
 
-salas = [
-    Sala(101, 0, "A"),
-    Sala(102, 0, "A"),
-    Sala(201, 1, "B"),
-    Sala(202, 1, "B"),
-]
+
 
 def cadastrar_usuario(usuario: Usuario):
     usuarios_cadastrados[
@@ -80,8 +75,15 @@ grupos_de_pesquisa = [
         [],
         [Projeto("Estrogênias", "Projeto de pesquisa", ["Camila"])],
         ["Camila, Fernando"],
+        [Sala(None, 0, Bloco('B'))]
     ),
-    GrupoDePesquisa("GOTEC", "Projeto", [], [], ["Caio"]),
+    GrupoDePesquisa(
+        "GOTEC",
+        "Projeto",
+        [], 
+        [], 
+        ["Caio"], 
+        [Sala(None, 1, Bloco('B')), Sala(None, 1, Bloco('A'))]),
 ]
 
 
