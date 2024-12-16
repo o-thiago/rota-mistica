@@ -99,6 +99,10 @@ class Sala:
     andar: int
     bloco: int
 
+    def mostrar_informacoes(self):
+        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco}")
+
+
 
 # Representa o horário de funcionamento de alguma entidade.
 # Por exemplo, o DEPAE pode funcionar das 8 as 12, GOTEC das 8 as 18 e assim vai.
@@ -117,6 +121,9 @@ class Departamento:
     # que o projeto vai tomar...
     responsaveis: list[str]
     sala: int | None
+
+    def mostrar_informacoes(self):
+        print(f"Departamento: {self.nome}\nDescricao: {self.descricao}")
 
 
 @dataclass
@@ -139,3 +146,7 @@ class GrupoDePesquisa:
 
     def remover_projeto(self, projeto: Projeto):
         self.projetos.remove(projeto)
+    
+    def mostrar_informacoes(self):
+        print(f"Grupo: {self.nome}\nDescricao: {self.descricao}\nProfessores: {', '.join(self.professores)}",)
+
