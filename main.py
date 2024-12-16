@@ -6,7 +6,7 @@
 # Moisés Lopes;
 # Thiago Macedo Mendes.
 
-import colorama
+import colorama 
 from colorama import Fore
 
 from classes import (
@@ -82,6 +82,19 @@ grupos_de_pesquisa = [
 andares = [Andar(0), Andar(1)]
 
 
+def confirmar_saida():
+    while True:
+        escolha = input("Você realmente quer sair? 1 - Sim, 2 - Não: ")
+        if escolha == "1":
+            escrever(Fore.YELLOW, "Retornando ao menu principal...")
+            return True  # Retorna True para sair
+        elif escolha == "2":
+            escrever(Fore.YELLOW, "Retornando ao cadastro...")
+            return False  # Retorna False para continuar no submenu
+        else:
+            alertar_erro("Escolha inválida. Digite 1 para sim ou 2 para não.")
+
+
 def colorir_texto(cor: str, texto: str) -> str:
     return f"{cor}{texto}{Fore.RESET}"
 
@@ -119,7 +132,7 @@ def escolha_simples(escolhas: list[str]) -> int:
 
 while True:
     escrever(Fore.GREEN, "Acesso do mapa de departamentos")
-    escolha = escolha_simples(["Login", "Registrar usúario"])
+    escolha = escolha_simples(["Login", "Registrar usúario", "Sair"])
 
     # login para entrar
     if escolha == 0:
@@ -134,21 +147,32 @@ while True:
             escrever(Fore.RED, "Usuário não encontrado")
     # cadastrar usuário
     elif escolha == 1:
-        escrever(Fore.GREEN, "Registrar usúario no sistema")
-        tipo_cadastro = escolha_simples(["Servidor", "Aluno"])
-
-        id_suap = input("Usuário: ")
-        nome = input("Nome: ")
-        senha = None
-
         while True:
-            if senha := Senha.create(input(Fore.GREEN + "Senha: ")):
-                escrever(Fore.YELLOW, f"{nome} você está cadastrado pode ir pro login")
-                break
-            else:
-                escrever(Fore.RED, "Senha inválida")
+            escrever(Fore.GREEN, "Registrar usúario no sistema")
+            tipo_cadastro = escolha_simples(["Servidor", "Aluno", "sair"])
 
-        if tipo_cadastro == 0:
-            cadastrar_usuario(Servidor(nome, senha, id_suap))
-        elif tipo_cadastro == 1:
-            cadastrar_usuario(Aluno(nome, senha, id_suap))
+            if tipo_cadastro == 2:  
+                if confirmar_saida():
+                    break  
+                else:
+                    continue
+
+            id_suap = input("Usuário: ")
+            nome = input("Nome: ")
+            senha = None
+
+            while True:
+                if senha := Senha.create(input(Fore.GREEN + "Senha: ")):
+                    escrever(Fore.YELLOW, f"{nome} você está cadastrado pode ir pro login")
+                    break
+                else:
+                    escrever(Fore.RED, "Senha inválida")
+
+            if tipo_cadastro == 0:
+                cadastrar_usuario(Servidor(nome, senha, id_suap))
+            elif tipo_cadastro == 1:
+                cadastrar_usuario(Aluno(nome, senha, id_suap))
+            break
+    elif escolha == 2:
+        escrever(Fore.YELLOW, "Saindo...")
+        break
