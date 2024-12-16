@@ -19,12 +19,17 @@ from classes import (
     Senha,
     Servidor,
     Usuario,
+    Sala
 )
 
 colorama.init()
 
 usuarios_cadastrados: dict[str, Usuario] = {}
 
+salas = [
+    Sala(101, 0, "A"),
+    Sala(102, 1, "B"),
+]
 
 def cadastrar_usuario(usuario: Usuario):
     usuarios_cadastrados[
@@ -117,6 +122,32 @@ def escolha_simples(escolhas: list[str]) -> int:
     return escolha - 1
 
 
+def procurar_mapa():
+    escrever(Fore.BLUE, "O que você está procurando?")
+    opcoes = ["Sala", "Grupo de Pesquisa", "Departamento"]
+    escolha = escolha_simples(opcoes)
+
+    if escolha == 0:  # Sala
+        escrever(Fore.BLUE, "Escolha uma sala:")
+        escolhas_salas = [f"Sala {sala.numero}" for sala in salas]
+        escolha_sala = escolha_simples(escolhas_salas)
+        salas[escolha_sala].mostrar_informacoes()
+
+    elif escolha == 1:  # Grupo de Pesquisa
+        escrever(Fore.BLUE, "Escolha um grupo de pesquisa:")
+        escolhas_grupos = [grupo.nome for grupo in grupos_de_pesquisa]
+        escolha_grupo = escolha_simples(escolhas_grupos)
+        grupos_de_pesquisa[escolha_grupo].mostrar_informacoes()
+
+    elif escolha == 2:  # Departamento
+        escrever(Fore.BLUE, "Escolha um departamento:")
+        escolhas_departamentos = [dep.nome for dep in depertamentos]
+        escolha_departamento = escolha_simples(escolhas_departamentos)
+        depertamentos[escolha_departamento].mostrar_informacoes()
+
+
+
+
 while True:
     escrever(Fore.GREEN, "Acesso do mapa de departamentos")
     escolha = escolha_simples(["Login", "Registrar usúario"])
@@ -130,6 +161,15 @@ while True:
 
         if (id_suap + senha) in usuarios_cadastrados:
             escrever(Fore.YELLOW, "Você está logado")
+            escrever(Fore.GREEN, "Mapa Interativo de Departamentos")
+            escolha = escolha_simples(["Procurar no mapa", "Sair"])
+
+            if escolha == 0:
+                procurar_mapa()
+            elif escolha == 1:
+                escrever(Fore.BLUE, "Saindo do programa...")
+                break
+
         else:
             escrever(Fore.RED, "Usuário não encontrado")
     # cadastrar usuário
