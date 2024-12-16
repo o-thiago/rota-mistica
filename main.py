@@ -28,7 +28,9 @@ usuarios_cadastrados: dict[str, Usuario] = {}
 
 salas = [
     Sala(101, 0, "A"),
-    Sala(102, 1, "B"),
+    Sala(102, 0, "A"),
+    Sala(201, 1, "B"),
+    Sala(202, 1, "B"),
 ]
 
 def cadastrar_usuario(usuario: Usuario):
@@ -46,7 +48,7 @@ for usuario_predefinido in [
     Aluno("Moises gato rau", Senha.mock(str(123456789)), str(2023106060059)),
     Aluno("Moises milquentos", Senha.mock(str(123456789)), str(2023106060060)),
     Aluno("Moises creeido", Senha.mock(str(123456789)), str(2023106060061)),
-    Aluno("Moises ", Senha.mock(str(1234)), str(2023106)),
+    Aluno("teste", Senha.mock(str(1234)), str(1234)),
 ]:
     cadastrar_usuario(usuario_predefinido)
 
@@ -161,14 +163,15 @@ while True:
 
         if (id_suap + senha) in usuarios_cadastrados:
             escrever(Fore.YELLOW, "Você está logado")
-            escrever(Fore.GREEN, "Mapa Interativo de Departamentos")
-            escolha = escolha_simples(["Procurar no mapa", "Sair"])
+            while True:
+                escrever(Fore.GREEN, "Mapa Interativo de Departamentos")
+                escolha = escolha_simples(["Procurar no mapa", "Sair"])
 
-            if escolha == 0:
-                procurar_mapa()
-            elif escolha == 1:
-                escrever(Fore.BLUE, "Saindo do programa...")
-                break
+                if escolha == 0:
+                    procurar_mapa()
+                elif escolha == 1:
+                    escrever(Fore.BLUE, "Saindo do programa...")
+                    break
 
         else:
             escrever(Fore.RED, "Usuário não encontrado")
