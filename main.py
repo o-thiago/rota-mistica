@@ -82,7 +82,7 @@ grupos_de_pesquisa = [
         [],
         [Projeto("Estrogênias", "Projeto de pesquisa", ["Camila"])],
         ["Camila, Fernando"],
-        [Sala(0, Bloco('B'))]
+        [Sala(1, Bloco('C'))]
     ),
     GrupoDePesquisa(
         "GOTEC",
