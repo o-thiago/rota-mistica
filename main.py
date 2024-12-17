@@ -75,7 +75,7 @@ grupos_de_pesquisa = [
             Projeto("Estrogênias", "Projeto de pesquisa sobre inclusão das mulheres", ["Cledenilson", "Camila"]),
             Projeto("Biogirl", "projeto que busca uma vida mais verde", ["Daniela Toda", "Camila"]),
             Projeto("fireFlies", "projeto para criação de um robo para a participação da OBR", ["Cledenilson", "Camila"]),
-            Projeto("erick", "projeto que busca uma vida mais verde", ["Willians"]),
+            Projeto("editoração para material didático para informática", "projeto com o objetivo da criação e editoração de Materiais didáticos", ["Willians"]),
         ],
         ["Camila, Daniela"],
     ),
@@ -91,7 +91,8 @@ def confirmar_saida():
     while True:
         escolha = input('''Você realmente quer sair? 
 1 - Sim
-2 - Não: ''')
+2 - Não
+: ''')
         if escolha == "1":
             escrever(Fore.YELLOW, "Retornando ao menu principal...")
             return True  
