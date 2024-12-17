@@ -51,7 +51,11 @@ for usuario_predefinido in [
 blocos = [Bloco("A"), Bloco("B"), Bloco("C")]
 
 # Definindo as salas
-salas = []
+salas = [
+    Sala(1, Bloco("B"), numero=1),
+    Sala(1, Bloco("B"), numero=2),
+    Sala(1, Bloco("B"), numero=13)
+]
 
 # Definindo os departamentos
 depertamentos = [
@@ -141,7 +145,7 @@ def procurar_mapa():
 
     if escolha == 0:  # Sala
         escrever(Fore.BLUE, "Escolha uma sala:")
-        escolhas_salas = [f"Sala {f"{sala.grupo.nome} "}{sala.numero}" for sala in salas]
+        escolhas_salas = [f"Sala {f"{sala.grupo.nome} " if sala.grupo else ""}{sala.numero}" for sala in salas]
         escolha_sala = escolha_simples(escolhas_salas)
         salas[escolha_sala].mostrar_informacoes()
     elif escolha == 1:  # Grupo de Pesquisa
