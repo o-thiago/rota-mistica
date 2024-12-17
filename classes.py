@@ -6,7 +6,7 @@ from dataclasses import dataclass
 class Senha:
     __texto: str
 
-    def _init_(self, texto: str):
+    def __init__(self, texto: str):
         self.__texto = texto
 
     def get_texto_simples(self):
@@ -29,7 +29,7 @@ class Senha:
 # Não se trata de uma classe abstrata pois no momento ela não possui características
 # que necessitam ser modificadas por uma classe filha.
 class Usuario:
-    def _init_(self, nome: str, senha: Senha, id_suap: str):
+    def __init__(self, nome: str, senha: Senha, id_suap: str):
         self.__nome = nome
         self.__senha = senha
         self.__id_suap = id_suap
@@ -46,13 +46,13 @@ class Usuario:
 
 
 class Aluno(Usuario):
-    def _init_(self, nome: str, senha: Senha, id_suap: str):
-        super()._init_(nome, senha, id_suap)
+    def __init__(self, nome: str, senha: Senha, id_suap: str):
+        super().__init__(nome, senha, id_suap)
 
 
 class Servidor(Usuario):
-    def _init_(self, nome: str, senha: Senha, id_suap: str):
-        super()._init_(nome, senha, id_suap)
+    def __init__(self, nome: str, senha: Senha, id_suap: str):
+        super().__init__(nome, senha, id_suap)
 
 
 # Objeto intermediario que permite que um administrador administre e modifique
@@ -62,15 +62,15 @@ class ModificadorUsuario:
         self.__user = user
 
     def set_nome(self, nome: str):
-        self._user._nome = nome
+        self.__user.__nome = nome
 
     def set_id_suap(self, id_suap: str):
-        self._user._id_suap = id_suap
+        self.__user.__id_suap = id_suap
 
 
 class Administrador(Usuario):
     def __init__(self, nome: str, senha: Senha, id_suap: str):
-        super()._init_(nome, senha, id_suap)
+        super().__init__(nome, senha, id_suap)
 
     def modificar_usuario(self, user: Usuario) -> ModificadorUsuario:
         return ModificadorUsuario(user)
