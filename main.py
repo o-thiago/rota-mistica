@@ -71,11 +71,14 @@ grupos_de_pesquisa = [
         "GPMECATRONICA",
         "Projeto",
         [],
-        [Projeto("Estrogênias", "Projeto de pesquisa", ["Camila"])],
-        ["Camila, Fernando"],
+        [
+            Projeto("Estrogênias", "Projeto de pesquisa sobre inclusão das mulheres", ["Camila"]),
+            Projeto("Biogirl", "projeto que busca uma vida mais verde", ["Daniela Toda", "Camila"]),
+        ],
+        ["Camila, Daniela"],
     ),
     GrupoDePesquisa("GOTEC", "Projeto", [], [], ["Caio"]),
-]
+ ]
 
 
 # Definindo andares
@@ -84,15 +87,18 @@ andares = [Andar(0), Andar(1)]
 
 def confirmar_saida():
     while True:
-        escolha = input("Você realmente quer sair? 1 - Sim, 2 - Não: ")
+        escolha = input('''Você realmente quer sair? 
+1 - Sim
+2 - Não: ''')
         if escolha == "1":
             escrever(Fore.YELLOW, "Retornando ao menu principal...")
-            return True  # Retorna True para sair
+            return True  
         elif escolha == "2":
             escrever(Fore.YELLOW, "Retornando ao cadastro...")
-            return False  # Retorna False para continuar no submenu
+            return False 
         else:
             alertar_erro("Escolha inválida. Digite 1 para sim ou 2 para não.")
+
 
 
 def colorir_texto(cor: str, texto: str) -> str:
@@ -134,17 +140,55 @@ while True:
     escrever(Fore.GREEN, "Acesso do mapa de departamentos")
     escolha = escolha_simples(["Login", "Registrar usúario", "Sair"])
 
-    # login para entrar
+# login para entrar
     if escolha == 0:
         print("LOGIN")
+#o Try está sendo usado de uma forma "fácil" para exibir o erro
+        try:
+            id_suap = input("Usuário: ")
+            senha = input("Senha: ")
 
-        id_suap = input("Usuário: ")
-        senha = input("Senha: ")
+            if (id_suap + senha) in usuarios_cadastrados:
+                escrever(Fore.YELLOW, "Você está logado")
 
-        if (id_suap + senha) in usuarios_cadastrados:
-            escrever(Fore.YELLOW, "Você está logado")
-        else:
-            escrever(Fore.RED, "Usuário não encontrado")
+# elaborar mais a parte do mapa, aqui começa as escolhas
+#AAAAA CONSEGUIIII FAZEERRRRR
+                while True:
+                    print(Fore.WHITE + '''OLA me chamo Estéfany vou te ajudar
+O que você está procurando??''')
+                    escolha_mapa = escolha_simples(["Grupo de pesquisas", "departamentos", "sair"])
+                    if escolha_mapa == 0: 
+                        print(Fore.YELLOW, ''' HUMM interresante...
+Você escolheu Grupos de Pesquisas.''')
+                        for grupo in grupos_de_pesquisa:
+                            for projeto in grupo.projetos:
+                               print(Fore.GREEN, f"Projeto: {projeto.nome}, Descrição: {projeto.descricao}")
+                  
+                    elif escolha_mapa == 1: 
+                        escrever(Fore.YELLOW, ''' Olha que legal...
+Você escolheu Departamentos.''')
+                        for dep in depertamentos:2
+                        escrever(Fore.GREEN, f"Departamento: {dep.nome}, Descrição: {dep.descricao}")
+
+                    elif escolha_mapa == 2:  
+                        escrever(Fore.YELLOW, "Saindo do mapa...")
+                        break 
+
+
+
+
+
+
+
+        except ValueError as x:
+            alertar_erro(str(x))
+        except Exception as x:
+            alertar_erro (f"erro totalmente desconhecido:{str(x)}")
+
+        #o finnaly foi adicionado porque independente da ação ele vai ter que finalizar essa parte
+        finally:
+            escrever(Fore.YELLOW, "Processo de login finalizado.")
+
     # cadastrar usuário
     elif escolha == 1:
         while True:
