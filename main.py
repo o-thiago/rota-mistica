@@ -162,9 +162,10 @@ while True:
             cadastrar_usuario(Servidor(nome, senha, id_suap))
         elif tipo_cadastro == 1:
             cadastrar_usuario(Aluno(nome, senha, id_suap))
-
-
-
+            
+#listar 
+for colecao in colecoes_nativas:
+    tipo = type(colecao)
 
 
 if tipo == list:
