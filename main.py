@@ -110,9 +110,8 @@ def escolha_simples(escolhas: list[str]) -> int:
         for i, opcao in enumerate(escolhas):
             escrever(Fore.GREEN, f"{i + 1} - {opcao}")
 
-        possivel_escolha: int | None = None
         try:
-            possivel_escolha = int(input("Escolha: "))
+            possivel_escolha: int | None = int(input("Escolha: "))
         except ValueError:
             alertar_erro("Digite um número!")
         else:
@@ -131,19 +130,13 @@ def procurar_mapa():
     opcoes = ["Sala", "Grupo de Pesquisa", "Departamento"]
     escolha = escolha_simples(opcoes)
 
-    if escolha == 0:  # Sala
-        escrever(Fore.BLUE, "Escolha uma sala:")
-        escolhas_salas = [f"Sala {sala.numero}" for sala in salas]
-        escolha_sala = escolha_simples(escolhas_salas)
-        salas[escolha_sala].mostrar_informacoes()
-
-    elif escolha == 1:  # Grupo de Pesquisa
+    if escolha == 0:  # Grupo de Pesquisa
         escrever(Fore.BLUE, "Escolha um grupo de pesquisa:")
         escolhas_grupos = [grupo.nome for grupo in grupos_de_pesquisa]
         escolha_grupo = escolha_simples(escolhas_grupos)
         grupos_de_pesquisa[escolha_grupo].mostrar_informacoes()
 
-    elif escolha == 2:  # Departamento
+    elif escolha == 1:  # Departamento
         escrever(Fore.BLUE, "Escolha um departamento:")
         escolhas_departamentos = [dep.nome for dep in depertamentos]
         escolha_departamento = escolha_simples(escolhas_departamentos)
@@ -154,7 +147,7 @@ def procurar_mapa():
 
 while True:
     escrever(Fore.GREEN, "Acesso do mapa de departamentos")
-    escolha = escolha_simples(["Login", "Registrar usúario"])
+    escolha = escolha_simples(["Login", "Registrar usúario", "Sair"])
 
     # login para entrar
     if escolha == 0:
@@ -197,3 +190,5 @@ while True:
             cadastrar_usuario(Servidor(nome, senha, id_suap))
         elif tipo_cadastro == 1:
             cadastrar_usuario(Aluno(nome, senha, id_suap))
+    elif escolha == 2:
+        escrever(Fore.GREEN, "Fechando o programa")
