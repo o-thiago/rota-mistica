@@ -164,7 +164,7 @@ while True:
 
     # login para entrar
     if escolha == 0:
-        print("LOGIN")
+        escrever(Fore.GREEN, "Realizando login")
 
         id_suap = input("Usuário: ")
         senha = input("Senha: ")
@@ -182,7 +182,7 @@ while True:
                     break
 
         else:
-            escrever(Fore.RED, "Usuário não encontrado")
+            escrever(Fore.RED, "Usuário não encontrado ou senha ínvalida")
     # cadastrar usuário
     elif escolha == 1:
         escrever(Fore.GREEN, "Registrar usúario no sistema")
