@@ -131,7 +131,7 @@ def escolha_simples(escolhas: list[str]) -> int:
                     f"Escolha ínvalida! (Escolha no intervalo: {1}-{len(escolhas)})"
                 )
             else:
-                return escolha - 1
+                return possivel_escolha - 1
 
 
 def procurar_mapa():
