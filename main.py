@@ -27,6 +27,16 @@ usuarios_cadastrados: dict[str, Usuario] = {}
 
 
 def cadastrar_usuario(usuario: Usuario):
+     try:
+        if not usuario.get_nome() or not usuario.get_id_suap() or not usuario.get_senha().get_texto_simples():
+            raise ValueError("ID SUAP, senha ou nome não podem estar vazios")
+            
+         chave = usuario.get_id_suap() + usuario.get_senha().get_texto_simples()
+        if chave in usuarios_cadastrados:
+            raise ValueError("Usuário já cadastrado")
+
+
+
     usuarios_cadastrados[
         usuario.get_id_suap() + usuario.get_senha().get_texto_simples()
     ] = usuario
@@ -152,3 +162,24 @@ while True:
             cadastrar_usuario(Servidor(nome, senha, id_suap))
         elif tipo_cadastro == 1:
             cadastrar_usuario(Aluno(nome, senha, id_suap))
+
+
+
+
+
+if tipo == list:
+        cor = Fore.RED
+    elif tipo == tuple:
+        cor = Fore.YELLOW
+    elif tipo == set:
+        cor = Fore.GREEN
+    elif tipo == dict:
+        cor = Fore.CYAN
+    elif tipo == str:
+        cor = Fore.MAGENTA
+    elif tipo == range:
+        cor = Fore.BLUE
+    else:
+        cor = Fore.WHITE
+
+    print(f"Valor: {cor}{colecao}{Fore.RESET}, Tipo: {Fore.RESET}{cor}{tipo}{Fore.RESET}")
