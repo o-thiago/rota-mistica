@@ -117,9 +117,7 @@ def alertar_erro(mensagem: str):
 
 
 def escolha_simples(escolhas: list[str]) -> int:
-    escolha = None
-
-    while not escolha:
+    while True:
         for i, opcao in enumerate(escolhas):
             escrever(Fore.GREEN, f"{i + 1} - {opcao}")
 
@@ -133,9 +131,7 @@ def escolha_simples(escolhas: list[str]) -> int:
                     f"Escolha ínvalida! (Escolha no intervalo: {1}-{len(escolhas)})"
                 )
             else:
-                escolha = possivel_escolha
-
-    return escolha - 1
+                return escolha - 1
 
 
 def procurar_mapa():
