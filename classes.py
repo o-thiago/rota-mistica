@@ -6,7 +6,7 @@ from dataclasses import dataclass
 class Senha:
     __texto: str
 
-    def __init__(self, texto: str):
+    def _init_(self, texto: str):
         self.__texto = texto
 
     def get_texto_simples(self):
@@ -29,7 +29,7 @@ class Senha:
 # Não se trata de uma classe abstrata pois no momento ela não possui características
 # que necessitam ser modificadas por uma classe filha.
 class Usuario:
-    def __init__(self, nome: str, senha: Senha, id_suap: str):
+    def _init_(self, nome: str, senha: Senha, id_suap: str):
         self.__nome = nome
         self.__senha = senha
         self.__id_suap = id_suap
@@ -46,13 +46,13 @@ class Usuario:
 
 
 class Aluno(Usuario):
-    def __init__(self, nome: str, senha: Senha, id_suap: str):
-        super().__init__(nome, senha, id_suap)
+    def _init_(self, nome: str, senha: Senha, id_suap: str):
+        super()._init_(nome, senha, id_suap)
 
 
 class Servidor(Usuario):
-    def __init__(self, nome: str, senha: Senha, id_suap: str):
-        super().__init__(nome, senha, id_suap)
+    def _init_(self, nome: str, senha: Senha, id_suap: str):
+        super()._init_(nome, senha, id_suap)
 
 
 # Objeto intermediario que permite que um administrador administre e modifique
@@ -62,15 +62,15 @@ class ModificadorUsuario:
         self.__user = user
 
     def set_nome(self, nome: str):
-        self.__user.__nome = nome
+        self._user._nome = nome
 
     def set_id_suap(self, id_suap: str):
-        self.__user.__id_suap = id_suap
+        self._user._id_suap = id_suap
 
 
 class Administrador(Usuario):
     def __init__(self, nome: str, senha: Senha, id_suap: str):
-        super().__init__(nome, senha, id_suap)
+        super()._init_(nome, senha, id_suap)
 
     def modificar_usuario(self, user: Usuario) -> ModificadorUsuario:
         return ModificadorUsuario(user)
@@ -139,12 +139,3 @@ class GrupoDePesquisa:
 
     def remover_projeto(self, projeto: Projeto):
         self.projetos.remove(projeto)
-        
-#adicionar e listar as diferentes coleções que a linguagem oferece 
-colecoes_python = [
-    [1, 2, 3, 4],      # Lista
-    (1, 2, 3, 4),      # Tupla
-    {1, 2, 3, 4},      # Conjunto
-    {"nome": "Anna", "idade": 17},  # Dicionário
-    "Python",          # String
-]
