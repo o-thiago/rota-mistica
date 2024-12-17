@@ -72,8 +72,10 @@ grupos_de_pesquisa = [
         "Projeto",
         [],
         [
-            Projeto("Estrogênias", "Projeto de pesquisa sobre inclusão das mulheres", ["Camila"]),
+            Projeto("Estrogênias", "Projeto de pesquisa sobre inclusão das mulheres", ["Cledenilson", "Camila"]),
             Projeto("Biogirl", "projeto que busca uma vida mais verde", ["Daniela Toda", "Camila"]),
+            Projeto("fireFlies", "projeto para criação de um robo para a participação da OBR", ["Cledenilson", "Camila"]),
+            Projeto("erick", "projeto que busca uma vida mais verde", ["Willians"]),
         ],
         ["Camila, Daniela"],
     ),
@@ -167,8 +169,8 @@ Você escolheu Grupos de Pesquisas.''')
                     elif escolha_mapa == 1: 
                         escrever(Fore.YELLOW, ''' Olha que legal...
 Você escolheu Departamentos.''')
-                        for dep in depertamentos:2
-                        escrever(Fore.GREEN, f"Departamento: {dep.nome}, Descrição: {dep.descricao}")
+                        for dep in depertamentos:
+                            escrever(Fore.GREEN, f"Departamento: {dep.nome}, Descrição: {dep.descricao}")
 
                     elif escolha_mapa == 2:  
                         escrever(Fore.YELLOW, "Saindo do mapa...")
@@ -185,9 +187,9 @@ Você escolheu Departamentos.''')
         except Exception as x:
             alertar_erro (f"erro totalmente desconhecido:{str(x)}")
 
-        #o finnaly foi adicionado porque independente da ação ele vai ter que finalizar essa parte
-        finally:
-            escrever(Fore.YELLOW, "Processo de login finalizado.")
+        #o else que serve tanto pro login incompleto quanto para o "sair" do submenu
+        else:
+            escrever(Fore.YELLOW, "Processo de login incompleto.")
 
     # cadastrar usuário
     elif escolha == 1:
