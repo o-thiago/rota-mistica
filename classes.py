@@ -97,7 +97,11 @@ class Andar:
 class Sala:
     numero: int | None
     andar: int
-    bloco: int
+    bloco: Bloco
+
+    def mostrar_informacoes(self):
+        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco}")
+
 
 
 # Representa o horário de funcionamento de alguma entidade.
@@ -118,6 +122,9 @@ class Departamento:
     responsaveis: list[str]
     sala: int | None
 
+    def mostrar_informacoes(self):
+        print(f"Departamento: {self.nome}\nDescricao: {self.descricao}")
+
 
 @dataclass
 class Projeto:
@@ -133,9 +140,15 @@ class GrupoDePesquisa:
     horarios: list[IntervaloFuncionamento]
     projetos: list[Projeto]
     professores: list[str]
+    salas : list[Sala]
+
 
     def adicionar_projeto(self, projeto: Projeto):
         self.projetos.append(projeto)
 
     def remover_projeto(self, projeto: Projeto):
         self.projetos.remove(projeto)
+    
+    def mostrar_informacoes(self):
+        print(f"Grupo: {self.nome}\nDescricao: {self.descricao}\nProfessores: {', '.join(self.professores)}\nLocalizações: {', '.join([f"sala {i+1} - (andar: {s.andar}, bloco: {s.bloco.id})" for i, s in enumerate(self.salas)])}")
+
