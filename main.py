@@ -43,12 +43,15 @@ for usuario_predefinido in [
     Aluno("Moises gato rau", Senha.mock(str(123456789)), str(2023106060059)),
     Aluno("Moises milquentos", Senha.mock(str(123456789)), str(2023106060060)),
     Aluno("Moises creeido", Senha.mock(str(123456789)), str(2023106060061)),
-    Aluno("teste", Senha.mock(str(1234)), str(1234)),
+    Aluno("teste", Senha.mock(str(123)), str(123)),
 ]:
     cadastrar_usuario(usuario_predefinido)
 
 # Definindo os blocos
 blocos = [Bloco("A"), Bloco("B"), Bloco("C")]
+
+# Definindo as salas
+salas = []
 
 # Definindo os departamentos
 depertamentos = [
@@ -75,7 +78,7 @@ grupos_de_pesquisa = [
         [],
         [Projeto("Estrogênias", "Projeto de pesquisa", ["Camila"])],
         ["Camila, Fernando"],
-        [Sala(None, 0, Bloco('B'))]
+        [Sala(0, Bloco('B'))]
     ),
     GrupoDePesquisa(
         "GOTEC",
@@ -83,8 +86,14 @@ grupos_de_pesquisa = [
         [], 
         [], 
         ["Caio"], 
-        [Sala(None, 1, Bloco('B')), Sala(None, 1, Bloco('A'))]),
+        [Sala(1, Bloco('B')), Sala(1, Bloco('A'))]),
 ]
+
+for grupo in grupos_de_pesquisa:
+    for i, sala in enumerate(grupo.salas):
+        sala.grupo = grupo
+        sala.numero = i + 1
+        salas.append(sala)
 
 
 # Definindo andares
@@ -130,13 +139,17 @@ def procurar_mapa():
     opcoes = ["Sala", "Grupo de Pesquisa", "Departamento"]
     escolha = escolha_simples(opcoes)
 
-    if escolha == 0:  # Grupo de Pesquisa
+    if escolha == 0:  # Sala
+        escrever(Fore.BLUE, "Escolha uma sala:")
+        escolhas_salas = [f"Sala {f"{sala.grupo.nome} "}{sala.numero}" for sala in salas]
+        escolha_sala = escolha_simples(escolhas_salas)
+        salas[escolha_sala].mostrar_informacoes()
+    elif escolha == 1:  # Grupo de Pesquisa
         escrever(Fore.BLUE, "Escolha um grupo de pesquisa:")
         escolhas_grupos = [grupo.nome for grupo in grupos_de_pesquisa]
         escolha_grupo = escolha_simples(escolhas_grupos)
         grupos_de_pesquisa[escolha_grupo].mostrar_informacoes()
-
-    elif escolha == 1:  # Departamento
+    elif escolha == 2:  # Departamento
         escrever(Fore.BLUE, "Escolha um departamento:")
         escolhas_departamentos = [dep.nome for dep in depertamentos]
         escolha_departamento = escolha_simples(escolhas_departamentos)

@@ -95,12 +95,13 @@ class Andar:
 
 @dataclass
 class Sala:
-    numero: int | None
     andar: int
     bloco: Bloco
+    numero: int | None = None
+    grupo: GrupoDePesquisa | None = None
 
     def mostrar_informacoes(self):
-        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco}")
+        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco.id}")
 
 
 
@@ -140,7 +141,7 @@ class GrupoDePesquisa:
     horarios: list[IntervaloFuncionamento]
     projetos: list[Projeto]
     professores: list[str]
-    salas : list[Sala]
+    salas: list[Sala]
 
 
     def adicionar_projeto(self, projeto: Projeto):
