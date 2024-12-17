@@ -139,3 +139,12 @@ class GrupoDePesquisa:
 
     def remover_projeto(self, projeto: Projeto):
         self.projetos.remove(projeto)
+        
+#adicionar e listar as diferentes coleções que a linguagem oferece 
+colecoes_python = [
+    [1, 2, 3, 4],      # Lista
+    (1, 2, 3, 4),      # Tupla
+    {1, 2, 3, 4},      # Conjunto
+    {"nome": "Anna", "idade": 17},  # Dicionário
+    "Python",          # String
+]
