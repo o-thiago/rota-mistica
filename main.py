@@ -25,6 +25,10 @@ colorama.init()
 
 usuarios_cadastrados: dict[str, Usuario] = {}
 
+
+def alertar_erro(mensagem: str):
+    escrever(Fore.RED, f"Erro: {mensagem}")
+
 def escolha_simples(escolhas: list[str]) -> int:
     while True:
         for i, opcao in enumerate(escolhas):
@@ -70,8 +74,8 @@ while True:
         id_suap = input("Usuário: ")
         senha = input("Senha: ")
 
-    if (id_suap + senha) in usuarios_cadastrados:
-        print("Você está logado")
+        if (id_suap + senha) in usuarios_cadastrados:
+            print("Você está logado")
 
         
 
@@ -155,3 +159,7 @@ except Exception as e:
     print( f"Erro ao criar andares: {e}" )
 finally:
     print( "Andares definidos" )
+
+    
+
+
