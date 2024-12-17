@@ -27,9 +27,11 @@ usuarios_cadastrados: dict[str, Usuario] = {}
 
 
 def alertar_erro(mensagem: str):
-    escrever(Fore.RED, f"Erro: {mensagem}")
+    print(Fore.RED, f"Erro: {mensagem}")
 
 def escolha_simples(escolhas: list[str]) -> int:
+    escolha = None
+    
     while True:
         for i, opcao in enumerate(escolhas):
             print( f"{i + 1} - {opcao}")
@@ -70,14 +72,48 @@ while True:
     # login para entrar
     if escolha == 0:
         print("LOGIN")
-    else:
-        id_suap = input("Usuário: ")
-        senha = input("Senha: ")
+#o Try está sendo usado de uma forma "fácil" para exibir o erro    
+        try:
+            id_suap = input("Usuário: ")
+            senha = input("Senha: ")
 
-        if (id_suap + senha) in usuarios_cadastrados:
-            print("Você está logado")
+            if (id_suap + senha) in usuarios_cadastrados:
+                print( "Você está logado")
+        finally:
+            print("Processo de login incompleto.")
 
         
+    elif escolha == 1:
+        while True:
+            print(Fore.GREEN, "Registrar usúario no sistema")
+            tipo_cadastro = escolha_simples(["Servidor", "Aluno"])
+
+            if tipo_cadastro == 2:  
+                if confirmar_saida():
+                    break  
+                else:
+                    continue
+
+            id_suap = input("Usuário: ")
+            nome = input("Nome: ")
+            senha = None
+
+            while True:
+                if senha := Senha.create(input(Fore.GREEN + "Senha: ")):
+                    print(Fore.YELLOW, f"{nome} você está cadastrado pode ir pro login")
+                    break
+                else:
+                    escrever(Fore.RED, "Senha inválida")
+
+            if tipo_cadastro == 0:
+                cadastrar_usuario(Servidor(nome, senha, id_suap))
+            elif tipo_cadastro == 1:
+                cadastrar_usuario(Aluno(nome, senha, id_suap))
+            break
+
+
+
+
 
 try:
     for usuario_predefinido in [
@@ -161,5 +197,8 @@ finally:
     print( "Andares definidos" )
 
     
+
+
+
 
 
