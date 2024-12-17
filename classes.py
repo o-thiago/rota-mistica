@@ -151,4 +151,3 @@ class GrupoDePesquisa:
     
     def mostrar_informacoes(self):
         print(f"Grupo: {self.nome}\nDescricao: {self.descricao}\nProfessores: {', '.join(self.professores)}\nLocalizações: {', '.join([f"sala {i+1} - (andar: {s.andar}, bloco: {s.bloco.id})" for i, s in enumerate(self.salas)])}")
-
