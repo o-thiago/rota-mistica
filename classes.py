@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
+
 class Senha:
     __texto: str
 
@@ -98,9 +99,11 @@ class Sala:
     numero: int | None
     andar: int
     bloco: Bloco
+    grupos: list[GrupoDePesquisa] = None
 
     def mostrar_informacoes(self):
-        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco}")
+        grupos_nomes = ', '.join(grupo.nome for grupo in self.grupos) if self.grupos else "Nenhum"
+        print(f"Sala {self.numero}, Andar {self.andar}, Bloco {self.bloco.id}\nGrupos de Pesquisa: {grupos_nomes}")
 
 
 
@@ -150,4 +153,4 @@ class GrupoDePesquisa:
         self.projetos.remove(projeto)
     
     def mostrar_informacoes(self):
-        print(f"Grupo: {self.nome}\nDescricao: {self.descricao}\nProfessores: {', '.join(self.professores)}\nLocalizações: {', '.join([f"sala {i+1} - (andar: {s.andar}, bloco: {s.bloco.id})" for i, s in enumerate(self.salas)])}")
+        print(f"Grupo: {self.nome}\nDescricao: {self.descricao}\nProfessores: {', '.join(self.professores)}\nLocalizações: {', '.join([f'sala {i+1} - (andar: {s.andar}, bloco: {s.bloco.id})' for i, s in enumerate(self.salas)])}")
