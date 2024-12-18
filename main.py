@@ -19,10 +19,14 @@ from classes import (
     Senha,
     Servidor,
     Usuario,
-    Sala
+    Sala,
 )
 
 colorama.init()
+
+
+class IdSuapInvalido(Exception): #erro pro id_suap só ser números
+    pass
 
 usuarios_cadastrados: dict[str, Usuario] = {}
 
@@ -57,13 +61,7 @@ depertamentos = [
     Departamento("CPALM", "Patrimônio e Almoxarifado", [], [], None),
     Departamento("DPLAD", "Planejamento e Administração", [], [], None),
     Departamento("CGTI", "Gestão de Tecnologia da Informação", [], [], None),
-    Departamento(
-        "NAPNE",
-        "Atendimento às Pessoas com Necessidades Educacionais Específicas",
-        [],
-        [],
-        None,
-    ),
+    Departamento("NAPNE", "Atendimento às Pessoas com Necessidades Educacionais Específicas", [], [], None,),
     Departamento("CRA", "Coordenação de Registros Acadêmicos", [], [], None),
 ]
 
@@ -85,9 +83,13 @@ grupos_de_pesquisa = [
         ["Caio"], 
         [Sala(None, 1, Bloco('B')), Sala(None, 1, Bloco('A'))]),
 ]
+salas = []
+for grupo in grupos_de_pesquisa:
+    for i, sala in enumerate(grupo.salas):
+        sala.grupos = [grupo] 
+        sala.numero = i + 1   
+        salas.append(sala)
 
-
-# Definindo andares
 andares = [Andar(0), Andar(1)]
 
 
@@ -181,8 +183,10 @@ while True:
     elif escolha == 1:
         escrever(Fore.GREEN, "Registrar usúario no sistema")
         tipo_cadastro = escolha_simples(["Servidor", "Aluno"])
-
+    
         id_suap = input("Usuário: ")
+        if not id_suap.isdigit():
+            raise IdSuapInvalido("O ID_SUAP deve conter apenas números.") #Não sei se era assim se a senhora queria professora, o uso do raise.
         nome = input("Nome: ")
         senha = None
 
